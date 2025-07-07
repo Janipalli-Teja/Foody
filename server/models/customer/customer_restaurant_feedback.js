@@ -1,0 +1,22 @@
+import mongoose from "mongoose";
+
+const customerfeedbackSchema=new mongoose.Schema({
+    rating:{
+        type:String,
+        required:true
+    },
+    feedback:{
+        type:String,
+        required:true 
+    },
+    customer_id:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Customer"
+    },
+    restaurant_id:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Restaurant"
+    },
+},{timestamps:true});
+
+export default mongoose.model("Customer_Restaurant_Feedback",customerfeedbackSchema);
