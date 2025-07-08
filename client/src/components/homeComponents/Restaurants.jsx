@@ -1,24 +1,6 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const Restaurants = () => {
-  const [restaurants, setRestaurants] = useState([]);
-
-  useEffect(() => {
-    HandleRestaurants();
-  }, []);
-
-  async function HandleRestaurants() {
-    try {
-      const url = "http://localhost:3000/";
-      const response = await fetch(url);
-      const data = await response.json();
-      setRestaurants(data.restaurants);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
+const Restaurants = ({restaurants}) => {
   return (
     <div className="p-4">
       <h1 className="text-3xl font-bold mb-4">Restaurants near you</h1>
