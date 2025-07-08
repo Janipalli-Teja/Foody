@@ -1,9 +1,11 @@
+import Categories from "./homeComponents/Categories";
+import Restaurants from "./homeComponents/Restaurants";
 const Home = () => {
+
   return (
     <div>
-      <div>
-        <h1></h1>
-      </div>
+      <Categories />
+      <Restaurants />
     </div>
   );
 };
