@@ -46,4 +46,6 @@ const restaurantApplicationSchema=new mongoose.Schema({
 },{timestamps:true});
 
 
-export default mongoose.model("Restaurant_Application",restaurantApplicationSchema);
+const Restaurant_Application= mongoose.model("Restaurant_Application",restaurantApplicationSchema);
+
+module.exports=Restaurant_Application;

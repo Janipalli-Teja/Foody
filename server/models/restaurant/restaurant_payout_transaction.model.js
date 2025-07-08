@@ -35,4 +35,6 @@ const restaurantPayoutSchema=new mongoose.Schema({
     }
 })
 
-export default mongoose.model("Restaurant_Payout",restaurantPayoutSchema);
+const Restaurant_Payout= mongoose.model("Restaurant_Payout",restaurantPayoutSchema);
+
+module.exports=Restaurant_Payout;

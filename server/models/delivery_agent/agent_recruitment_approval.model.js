@@ -35,4 +35,6 @@ const agentApplicationSchema=new mongoose.Schema({
     }
 },{timestamps:true});
 
-export default mongoose.model("Agent_Application",agentApplicationSchema);
+const Agent_Application = mongoose.model("Agent_Application",agentApplicationSchema);
+
+module.exports=Agent_Application;

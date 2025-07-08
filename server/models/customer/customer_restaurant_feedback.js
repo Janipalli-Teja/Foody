@@ -19,4 +19,6 @@ const customerfeedbackSchema=new mongoose.Schema({
     },
 },{timestamps:true});
 
-export default mongoose.model("Customer_Restaurant_Feedback",customerfeedbackSchema);
+const Customer_Restaurant_Feedback = mongoose.model("Customer_Restaurant_Feedback",customerfeedbackSchema);
+
+module.exports=Customer_Restaurant_Feedback;

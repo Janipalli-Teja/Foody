@@ -18,4 +18,6 @@ const customerFeedbackSchema=new mongoose.Schema({
     },
 },{timestamps:true});
 
-export default mongoose.model("Customer_Agent_Feedback",customerFeedbackSchema);
+const Customer_Agent_Feedback= mongoose.model("Customer_Agent_Feedback",customerFeedbackSchema);
+
+module.exports=Customer_Agent_Feedback;

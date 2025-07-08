@@ -15,4 +15,6 @@ const notificationSchema=new mongoose.Schema({
     },
 },{timestamps:true});
 
-export default mongoose.model("Customer_Notication",notificationSchema);
+const Customer_Notication =  mongoose.model("Customer_Notication",notificationSchema);
+
+module.exports=Customer_Notication;

@@ -14,5 +14,6 @@ const customerSchema=new mongoose.Schema({
     }
 },{timestamps:true});
 
+const Customer= mongo.MongoDBCollectionNamespace("Customer",customerSchema);
 
-export default mongo.MongoDBCollectionNamespace("Customer",customerSchema);
+module.exports=Customer;

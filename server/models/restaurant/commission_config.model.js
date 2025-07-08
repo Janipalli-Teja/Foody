@@ -11,4 +11,6 @@ const commissionSchema=new mongoose.Schema({
     }
 },{timestamps:true})
 
-export default mongoose.model("Commission",commissionSchema);
+const Commission= mongoose.model("Commission",commissionSchema);
+
+module.exports=Commission;

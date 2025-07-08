@@ -28,4 +28,6 @@ const FinalOrderSchema=new mongoose.Schema({
 },{timestamps:true});
 
 
-export default mongoose.model("Final_Order",FinalOrderSchema);
+const Final_Order= mongoose.model("Final_Order",FinalOrderSchema);
+
+module.exports=Final_Order;

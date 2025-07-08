@@ -22,5 +22,6 @@ const agentSchema=new mongoose.Schema({
     }
 },{timestamps:true});
 
+const Agent= mongoose.model("Agent",agentSchema);
 
-export default mongoose.model("Agent",agentSchema);
+module.exports=Agent;

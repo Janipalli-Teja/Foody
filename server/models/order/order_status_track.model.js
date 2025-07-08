@@ -19,4 +19,6 @@ const orderStatusSchema=new mongoose.Schema({
     }
 },{timestamps:true});
 
-export default mongoose.model("Order_Status",orderStatusSchema);
+const Order_Status= mongoose.model("Order_Status",orderStatusSchema);
+
+module.exports=Order_Status;

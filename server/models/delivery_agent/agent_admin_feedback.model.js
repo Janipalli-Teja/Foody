@@ -25,4 +25,6 @@ const agentFeedbackSchema=new mongoose.Schema({
 
 },{timestamps:true});
 
-export default mongoose.model("Agent_Feedback",agentFeedbackSchema);
+const Agent_Feedback = mongoose.model("Agent_Feedback",agentFeedbackSchema);
+
+module.exports=Agent_Feedback;

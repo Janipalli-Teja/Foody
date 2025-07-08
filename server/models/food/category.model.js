@@ -1,9 +1,12 @@
-import mongoose, { mongo } from "mongoose";
+const mongoose=require('mongoose');
 
-const categorySchema=new mongooseSchema({
+const categorySchema=new mongoose.Schema({
     name:{
         type:String,
         required:true
+    },
+    img_url:{
+        type:String,
     },
     description:{
         type:String,
@@ -13,5 +16,6 @@ const categorySchema=new mongooseSchema({
         enum:["available","unavailable"]
     }
 })
+const Category=mongoose.model("Category",categorySchema);
 
-export default mongoose.model("Category",categorySchema);
+module.exports=Category;

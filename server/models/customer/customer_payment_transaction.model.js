@@ -28,5 +28,6 @@ const transactionSchema=new mongoose.Schema({
 
 },{timestamps:true});
 
+const Cutomer_Payment= mongoose.model("Cutomer_Payment",transactionSchema);
 
-export default mongoose.model("Cutomer_Payment",transactionSchema);
+module.exports=Cutomer_Payment;
