@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-
+const mongoose=require('mongoose');
 const FinalOrderSchema=new mongoose.Schema({
     customer_id:{
         type:mongoose.Schema.Types.ObjectId,

@@ -1,5 +1,4 @@
-import mongoose, { mongo } from "mongoose";
-
+const mongoose=require('mongoose');
 const commissionSchema=new mongoose.Schema({
     percentage:{
         type:String,

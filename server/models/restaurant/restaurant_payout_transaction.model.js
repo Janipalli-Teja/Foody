@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-
+const mongoose=require('mongoose');
 const restaurantPayoutSchema=new mongoose.Schema({
     payout_amount:{
         type:String,

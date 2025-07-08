@@ -1,5 +1,4 @@
-import mongoose, { mongo } from "mongoose";
-
+const mongoose=require('mongoose');
 const orderStatusSchema=new mongoose.Schema({
     order_id:{
         type:mongoose.Schema.Types.ObjectId,

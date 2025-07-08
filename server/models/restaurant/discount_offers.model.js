@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-
+const mongoose=require('mongoose');
 const discountSchema=new mongoose.Schema({
     title:{
         type:String,

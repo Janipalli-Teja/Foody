@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-
+const mongoose=require('mongoose');
 const restaurantApplicationSchema=new mongoose.Schema({
     name:{
         type:String,

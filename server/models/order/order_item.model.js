@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-
+const mongoose=require('mongoose');
 const orderItemSchema=new mongoose.Schema({
     food_item_id:{
         type:mongoose.Schema.Types.ObjectId,
