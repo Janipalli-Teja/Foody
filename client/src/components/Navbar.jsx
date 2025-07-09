@@ -7,7 +7,7 @@ const Navbar = () => {
         {/* Left side */}
         <div className="flex items-center space-x-4">
           <Link to="/">
-            <img src="logo.png" alt="Logo" className="h-10 w-auto" />
+            <img src="logo.png" alt="Logo" className="h-10 w-auto rounded"/>
           </Link>
           <input
             type="text"
