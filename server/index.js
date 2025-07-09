@@ -4,10 +4,12 @@ const cors=require('cors');
 dotenv.config();
 const ConnectionDB=require('./db/connect.js')
 
-// import category model
-
+// importing models
 const Category =require( "./models/food/category.model.js");
 const Restaurant=require("./models/restaurant/restaurant_profile.model.js");
+
+// importing routes 
+const homeRouter = require('./routes/cutomer/home.route.js');
 
 const app=express();
 app.use(express.json());
@@ -24,20 +26,7 @@ ConnectionDB(process.env.MONGO_URI)
 })
 
 
-app.get("/",async (req,res)=>{
-    try{
-        const categories=await Category.find();
-        const restaurants=await Restaurant.find();
-        res.status(200).json({
-            "success":true,
-            categories,
-            restaurants
-        });
-    }catch(err){
-        console.log("error",err);
-        res.status(500).json({ msg: "Server error" });
-    }
-})
+app.use("/",homeRouter);
 
 app.post("/add-category",async (req,res)=>{
     try{
