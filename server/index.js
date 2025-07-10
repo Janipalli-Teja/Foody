@@ -12,7 +12,8 @@ const Restaurant=require("./models/restaurant/restaurant_profile.model.js");
 
 // importing routes 
 const homeRouter = require('./routes/cutomer/home.route.js');
-const Agentrouter=require('./routes/agent/agent.registration.route.js');
+const AgentRegistration=require('./routes/agent/agent.registration.route.js');
+const RestaurantRegistration=require("./routes/restaurant/restaurant.registration.route.js")
 
 const app=express();
 
@@ -34,7 +35,8 @@ ConnectionDB(process.env.MONGO_URI)
 
 //handling routes
 app.use("/",homeRouter);
-app.use("/agent-registration",Agentrouter);
+app.use("/agent-registration",AgentRegistration);
+app.use("/restaurant-registration",RestaurantRegistration);
 
 app.post("/add-category",async (req,res)=>{
     try{

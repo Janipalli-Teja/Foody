@@ -26,7 +26,8 @@ const agentApplicationSchema=new mongoose.Schema({
     },
     approval_status:{
         type:String,
-        enum:["pending","approved","rejected"]
+        enum:["pending","approved","rejected"],
+        default:"pending"
     },
     handled_admin_id:{
         type:mongoose.Schema.Types.ObjectId,
