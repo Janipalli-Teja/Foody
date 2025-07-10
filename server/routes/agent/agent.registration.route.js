@@ -19,7 +19,7 @@ router.post("/",upload.single('img'),async (req,res)=>{
     const license_img_url=req.file.filename;
 
     try{
-        const newApplication= new Agent_Application({fullname,phone_number,vehicle_number,license_img_url,license_number,handled_admin_id,approval_status});
+        const newApplication= new Agent_Application({fullname,phone_number,email,vehicle_number,license_img_url,license_number,handled_admin_id,approval_status});
         await newApplication.save();
         res.status(201).json({"msg":"application submitted",data:newApplication});
     }catch(err){
