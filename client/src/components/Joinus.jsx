@@ -37,9 +37,11 @@ const Joinus = () => {
           <p className="text-gray-600">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi provident corporis facere quas cupiditate possimus quae, laboriosam accusantium optio animi aliquid sint eius officia recusandae.
           </p>
+          <Link to="/restaurant-registration">
           <button className="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-xl transition">
             Register your Restaurant
           </button>
+          </Link>
         </div>
       </div>
     </div>
