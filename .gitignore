@@ -41,6 +41,9 @@ dump/
 server/dist/
 client/dist/
 
+server/uploads/
+
+
 # Optional: Ignore static analysis cache
 .eslintcache
 
