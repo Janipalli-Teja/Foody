@@ -12,17 +12,22 @@ const agentApplicationSchema=new mongoose.Schema({
         type:String,
         required:true,
     },
+    vehicle_number:{
+        type:String,
+        required:true
+    },
     license_number:{
         type:String,
         required:true
     },
-    license_img:{
+    license_img_url:{
         type:String,
         required:true,
     },
     approval_status:{
         type:String,
-        enum:["pendin","approved","rejected"]
+        enum:["pending","approved","rejected"],
+        default:"pending"
     },
     handled_admin_id:{
         type:mongoose.Schema.Types.ObjectId,
@@ -30,7 +35,7 @@ const agentApplicationSchema=new mongoose.Schema({
     },
     remarks:{
         type:String,
-        requred:true
+        default:""
     }
 },{timestamps:true});
 

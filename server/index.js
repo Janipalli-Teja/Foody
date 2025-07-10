@@ -2,17 +2,24 @@ const express =require('express');
 const dotenv= require('dotenv');
 const cors=require('cors');
 dotenv.config();
-const ConnectionDB=require('./db/connect.js')
+const ConnectionDB=require('./db/connect.js');
 
 // importing models
 const Category =require( "./models/food/category.model.js");
 const Restaurant=require("./models/restaurant/restaurant_profile.model.js");
 
+
+
 // importing routes 
 const homeRouter = require('./routes/cutomer/home.route.js');
+const AgentRegistration=require('./routes/agent/agent.registration.route.js');
+const RestaurantRegistration=require("./routes/restaurant/restaurant.registration.route.js")
 
 const app=express();
+
+//usage of middilewares
 app.use(express.json());
+app.use(express.urlencoded());
 app.use(cors());
 
 
@@ -26,7 +33,10 @@ ConnectionDB(process.env.MONGO_URI)
 })
 
 
+//handling routes
 app.use("/",homeRouter);
+app.use("/agent-registration",AgentRegistration);
+app.use("/restaurant-registration",RestaurantRegistration);
 
 app.post("/add-category",async (req,res)=>{
     try{
