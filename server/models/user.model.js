@@ -1,9 +1,8 @@
 const mongoose=require('mongoose');
 const userSchema=new mongoose.Schema({
-    username:{
+    name:{
         type: String,
         required:true,
-        unique:true
     },
     phone_number:{
         type:String,
@@ -13,7 +12,8 @@ const userSchema=new mongoose.Schema({
     role:{
         type:String,
         enum:["customer","restaurant","agent","admin"],
-        required:true
+        required:true,
+        default:"cutomer"
     },
     password_hash:{
         type:String,
