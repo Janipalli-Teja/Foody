@@ -13,11 +13,7 @@ const userSchema=new mongoose.Schema({
         type:String,
         enum:["customer","restaurant","agent","admin"],
         required:true,
-        default:"cutomer"
-    },
-    password_hash:{
-        type:String,
-        required:true,
+        default:"customer"
     },
 },{timestamps:true})
 

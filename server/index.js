@@ -1,41 +1,52 @@
-const express =require('express');
-const dotenv= require('dotenv');
-const cors=require('cors');
+const express = require('express');
+const dotenv = require('dotenv');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
 dotenv.config();
-const ConnectionDB=require('./db/connect.js');
 
+const ConnectionDB = require('./db/connect.js');
+const allowedOrigins = ["http://localhost:5173"];
 
 // importing routes 
 const homeRouter = require('./routes/cutomer/home.route.js');
-const AgentRegistration=require('./routes/agent/agent.registration.route.js');
-const RestaurantRegistration=require("./routes/restaurant/restaurant.registration.route.js");
-const AdminActions=require("./routes/admin/admin.actions.route.js");
+const AgentRegistration = require('./routes/agent/agent.registration.route.js');
+const RestaurantRegistration = require("./routes/restaurant/restaurant.registration.route.js");
+const AdminActions = require("./routes/admin/admin.actions.route.js");
+const UserRouter = require("./routes/user.route.js");
 
-const app=express();
+//importing middilewares 
+const verifyToken=require("./middlewares/auth.middleware.js")
 
-//usage of middilewares
+const app = express();
+
+// usage of middlewares
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(cors());
+app.use(cookieParser());
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 
-
-//mongo connection
+// mongo connection
 ConnectionDB(process.env.MONGO_URI)
-.then(()=>{
-    console.log("mongoDb connected");
-})
-.catch((err)=>{
-    console.log("error occured ",err);
-})
+  .then(() => console.log("mongoDb connected"))
+  .catch((err) => console.log("error occurred ", err));
 
 
-//handling routes
+
 app.use("/home",homeRouter);
-app.use("/agent-registration",AgentRegistration);
-app.use("/restaurant-registration",RestaurantRegistration);
-app.use("/admin",AdminActions);
+app.use("/agent-registration", AgentRegistration);
+app.use("/restaurant-registration", RestaurantRegistration);
+app.use("/admin", AdminActions);
+app.use("/user", UserRouter);
 
 
-app.listen(process.env.PORT,()=>{
-    console.log(`server running on http://localhost:${process.env.PORT}`);
-}) 
+app.get("/",verifyToken,(req,res)=>{
+    return res.status(200).json(req.user)
+})
+
+// start server
+app.listen(process.env.PORT, () => {
+  console.log(`server running on http://localhost:${process.env.PORT}`);
+});
