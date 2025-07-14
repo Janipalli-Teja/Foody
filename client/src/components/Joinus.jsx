@@ -10,7 +10,7 @@ const Joinus = () => {
         <img
           src="agent.jpg"
           alt="Delivery Partner"
-          className="w-full md:w-1/3 rounded-2xl shadow-lg object-cover"
+          className="w-full md:w-1/3 rounded-2xl shadow-m object-cover"
         />
         <div className="flex-1 text-center md:text-left space-y-6">
           <h2 className="text-3xl font-semibold">Ride With Foody</h2>
@@ -30,7 +30,7 @@ const Joinus = () => {
         <img
           src="restaurant.jpg"
           alt="Restaurant Partner"
-          className="w-full md:w-1/2 rounded-2xl shadow-lg object-cover"
+          className="w-full md:w-1/2 rounded-2xl shadow-m object-cover"
         />
         <div className="flex-1 text-center md:text-left space-y-6">
           <h2 className="text-3xl font-semibold">Foody Partner Program</h2>

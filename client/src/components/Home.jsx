@@ -13,7 +13,7 @@ const Home = () => {
     async function HandleHomeComponents() {
       try {
   
-        const url = "http://localhost:3000/";
+        const url = "http://localhost:3000/home";
         const response = await fetch(url);
         const data = await response.json();
         setCategory_items(data.categories);
