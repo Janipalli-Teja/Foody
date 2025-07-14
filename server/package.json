@@ -17,6 +17,7 @@
     "express": "^5.1.0",
     "mongoose": "^8.16.2",
     "multer": "^2.0.1",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "twilio": "^5.7.3"
   }
 }
