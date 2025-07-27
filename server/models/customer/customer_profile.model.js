@@ -1,9 +1,6 @@
 const mongoose=require('mongoose');
 
 const customerSchema=new mongoose.Schema({
-    full_name:{
-        type:String,
-    },
     address:{
         type:String,
         required:true,
@@ -14,6 +11,6 @@ const customerSchema=new mongoose.Schema({
     }
 },{timestamps:true});
 
-const Customer= mongo.MongoDBCollectionNamespace("Customer",customerSchema);
+const Customer= mongoose.model("Customer",customerSchema);
 
 module.exports=Customer;
