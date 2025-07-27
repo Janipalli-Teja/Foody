@@ -6,24 +6,24 @@ const Navbar = () => {
   const [user, setUser] = useState(null);
   const [showSidebar, setShowSidebar] = useState(false);
 
-  useEffect(() => {
-    const checkUser = async () => {
-      try {
-        const res = await fetch("http://localhost:3000/", {
-          credentials: "include", // important for httpOnly cookies
-        });
-        if (res.ok) {
-          const data = await res.json();
-          setUser(data.name);
-        } else {
-          setUser(null);
-        }
-      } catch (err) {
-        console.error("User check failed:", err);
+  const checkUser = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/", {
+        credentials: "include", // important for httpOnly cookies
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setUser(data.name);
+      } else {
         setUser(null);
       }
-    };
-
+    } catch (err) {
+      console.error("User check failed:", err);
+      setUser(null);
+    }
+  };
+  
+  useEffect(() => {
     checkUser();
   }, []);
 
@@ -39,7 +39,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3 md:py-4">
         {/* Left side */}
         <div className="flex items-center space-x-4">
-          <Link to="/">
+          <Link to="/home">
             <img src="logo.png" alt="Logo" className="h-10 w-auto rounded" />
           </Link>
           <input

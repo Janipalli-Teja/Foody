@@ -84,8 +84,8 @@ const SidebarForm = ({ onClose }) => {
             }
 
             alert(data.msg);
-            console.log(data.user);
             onClose();
+            window.location.reload();
         } catch (err) {
             console.error(err);
             alert(err.message);
