@@ -19,8 +19,8 @@ const RestaurantRegister = () => {
             formData.append("address", address);
             formData.append("phone_number", phone_number);
             formData.append("email", email);
-            formData.append("license_number", license_number);
-            formData.append("license_number_img", license_number_img);
+            formData.append("restaurant_license_number", license_number);
+            formData.append("restaurant_license_img", license_number_img);
             formData.append("opens_at", opening);
             formData.append("closes_at", closing);
 

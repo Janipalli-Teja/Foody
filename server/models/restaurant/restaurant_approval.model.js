@@ -16,7 +16,7 @@ const restaurantApplicationSchema=new mongoose.Schema({
         type:String,
         required:true,
     },
-    license_number:{
+    restaurant_license_number:{
         type:String,
         required:true,
     },

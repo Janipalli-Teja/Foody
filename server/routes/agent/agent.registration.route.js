@@ -6,7 +6,7 @@ const Agent_Application=require('../../models/delivery_agent/agent_recruitment_a
 
 const router=express.Router();
 
-router.post("/",upload.single('img'),async (req,res)=>{
+router.post("/",upload.single('license_number_img'),async (req,res)=>{
     const handled_admin_id='662e5c03bbf5bc7e4c123abc';
     const{fullname,phone_number,email,vehicle_number,license_number,approval_status}=req.body;
     
@@ -16,7 +16,7 @@ router.post("/",upload.single('img'),async (req,res)=>{
     if(!req.file){
         res.status(400).json({"msg":"image not uploaded"});
     }
-    const license_img_url=req.file.filename;
+    const license_img_url=req.file.path;
 
     try{
         const newApplication= new Agent_Application({fullname,phone_number,email,vehicle_number,license_img_url,license_number,handled_admin_id,approval_status});

@@ -27,7 +27,7 @@ const AgentRegistration = () => {
             formData.append("email", email);
             formData.append("vehicle_number", vehicleNumber);
             formData.append("license_number", licenseNo);
-            formData.append("img", licenseImg);
+            formData.append("license_number_img", licenseImg);
             formData.append("approval_status", "pending");
 
             const response = await fetch(url, {
