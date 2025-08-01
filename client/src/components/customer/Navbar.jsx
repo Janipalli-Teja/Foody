@@ -1,31 +1,73 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import SidebarForm from "./SidebarForm"; // Assuming your sidebar form component
+import SidebarForm from "./SidebarForm";
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
+  const [userId, setUserID] = useState(null);
   const [showSidebar, setShowSidebar] = useState(false);
+  const navigate = useNavigate();
 
-  const checkUser = async () => {
+  const checkRestaurant = async (id) => {
+    try {
+      const res = await fetch("http://localhost:3000/restaurant/profile", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ userID: id }),
+      });
+      return res.ok;
+    } catch (err) {
+      console.error("Restaurant check failed:", err);
+      return false;
+    }
+  };
+
+  const checkDeliveryAgent = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/agent/profile", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ userID: userId }),
+      });
+      return res.ok;
+    } catch (err) {
+      console.error("Agent check failed:", err);
+      return false;
+    }
+  };
+
+useEffect(() => {
+  const checkAndRedirect = async () => {
     try {
       const res = await fetch("http://localhost:3000/", {
-        credentials: "include", // important for httpOnly cookies
+        credentials: "include",
       });
+
       if (res.ok) {
         const data = await res.json();
         setUser(data.name);
+        setUserID(data.id); // for later use, but don't rely on it right now
+
+        const isRestaurant = await checkRestaurant(data.id);  // pass ID directly
+        if (isRestaurant) {
+          navigate("/restaurant/dashboard"); 
+        }
       } else {
         setUser(null);
+        setUserID(null);
       }
     } catch (err) {
       console.error("User check failed:", err);
       setUser(null);
+      setUserID(null);
     }
   };
-  
-  useEffect(() => {
-    checkUser();
-  }, []);
+
+  checkAndRedirect();
+}, []); 
+
 
   const handleAccountClick = (e) => {
     if (!user) {
@@ -56,8 +98,7 @@ const Navbar = () => {
           <NavLink
             to="/join-us"
             className={({ isActive }) =>
-              `px-2 py-1 rounded transition ${
-                isActive ? "text-red-600 font-semibold" : "hover:text-blue-500"
+              `px-2 py-1 rounded transition ${isActive ? "text-red-600 font-semibold" : "hover:text-blue-500"
               }`
             }
           >
@@ -66,8 +107,7 @@ const Navbar = () => {
           <NavLink
             to="/search"
             className={({ isActive }) =>
-              `px-2 py-1 rounded transition ${
-                isActive ? "text-red-600 font-semibold" : "hover:text-blue-500"
+              `px-2 py-1 rounded transition ${isActive ? "text-red-600 font-semibold" : "hover:text-blue-500"
               }`
             }
           >
@@ -76,8 +116,7 @@ const Navbar = () => {
           <NavLink
             to="/offers-near-me"
             className={({ isActive }) =>
-              `px-2 py-1 rounded transition ${
-                isActive ? "text-red-600 font-semibold" : "hover:text-blue-500"
+              `px-2 py-1 rounded transition ${isActive ? "text-red-600 font-semibold" : "hover:text-blue-500"
               }`
             }
           >
@@ -87,8 +126,7 @@ const Navbar = () => {
             to="/my-account"
             onClick={handleAccountClick}
             className={({ isActive }) =>
-              `px-2 py-1 rounded transition ${
-                isActive ? "text-red-600 font-semibold" : "hover:text-blue-500"
+              `px-2 py-1 rounded transition ${isActive ? "text-red-600 font-semibold" : "hover:text-blue-500"
               }`
             }
           >
@@ -97,8 +135,7 @@ const Navbar = () => {
           <NavLink
             to="/my-cart"
             className={({ isActive }) =>
-              `px-2 py-1 rounded transition ${
-                isActive ? "text-red-600 font-semibold" : "hover:text-blue-500"
+              `px-2 py-1 rounded transition ${isActive ? "text-red-600 font-semibold" : "hover:text-blue-500"
               }`
             }
           >
