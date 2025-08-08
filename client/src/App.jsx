@@ -1,6 +1,8 @@
 import './App.css';
 import { Route, Routes } from 'react-router';
 
+import ErrorPage from './components/ErrorPage.jsx';
+
 //customer
 import Home from './components/customer/Home.jsx';
 import Joinus from './components/customer/Joinus.jsx';
@@ -26,6 +28,7 @@ function App() {
     <div>
       <Routes>
         <Route element={<CustomerLayout />}>
+          <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/join-us" element={<Joinus />} />
           <Route path="/agent-registration" element={<AgentRegister />} />
@@ -40,8 +43,8 @@ function App() {
           <Route path="history" element={<OrderHistory />} />
           <Route path="offers" element={<Offers />} />
           <Route path="support" element={<RestaurantSupport />} />
-          <Route path="payments" element={<Payments />} />
         </Route> 
+        <Route path='*' element={<ErrorPage/>}/>
       </Routes>
     </div>
   );

@@ -13,9 +13,9 @@ const RestaurantRegister = () => {
 
     async function HandleRegistration() {
         try {
-            const url = "http://localhost:3000/restaurant-registration";
+            const url = "http://localhost:3000/restaurant/registration";
             const formData = new FormData();
-            formData.append("name", name);
+            formData.append("restaurant_name", name);
             formData.append("address", address);
             formData.append("phone_number", phone_number);
             formData.append("email", email);

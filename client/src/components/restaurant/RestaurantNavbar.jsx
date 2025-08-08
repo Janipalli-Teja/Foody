@@ -4,6 +4,32 @@ import { useState } from 'react';
 const RestaurantNavbar = () => {
   const [restaurant, setRestaurant] = useState('');
 
+
+
+  const checkRestaurant = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/restaurant/profile", {
+        method: "POST",
+        credentials: "include",
+      });
+
+      if (!res.ok) {
+        const errData = await res.json();
+        console.warn("Restaurant check failed:", errData.msg);
+        return;
+      }
+      const data = await res.json();
+      setRestaurant(data.name);
+    } catch (err) {
+      console.error("Network error (restaurant check):", err);
+    }
+  };
+
+
+  useState(() => {
+    checkRestaurant();
+  }, []);
+
   return (
     <div className="flex h-screen overflow-hidden">
       {/* Sidebar */}

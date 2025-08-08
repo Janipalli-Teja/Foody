@@ -6,19 +6,26 @@ const Navbar = () => {
   const [user, setUser] = useState(null);
   const [userId, setUserID] = useState(null);
   const [showSidebar, setShowSidebar] = useState(false);
+  const [error, setError] = useState(null); // ✅ error state
   const navigate = useNavigate();
 
-  const checkRestaurant = async (id) => {
+  const checkRestaurant = async () => {
     try {
       const res = await fetch("http://localhost:3000/restaurant/profile", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ userID: id }),
       });
-      return res.ok;
+
+      if (!res.ok) {
+        const errData = await res.json();
+        console.warn("Restaurant check failed:", errData.msg);
+        return false;
+      }
+
+      return true;
     } catch (err) {
-      console.error("Restaurant check failed:", err);
+      console.error("Network error (restaurant check):", err);
+      setError("Unable to verify restaurant profile.");
       return false;
     }
   };
@@ -31,43 +38,60 @@ const Navbar = () => {
         credentials: "include",
         body: JSON.stringify({ userID: userId }),
       });
-      return res.ok;
+
+      if (!res.ok) {
+        const errData = await res.json();
+        console.warn("Agent check failed:", errData.msg);
+        return false;
+      }
+
+      return true;
     } catch (err) {
-      console.error("Agent check failed:", err);
+      console.error("Network error (agent check):", err);
+      setError("Unable to verify delivery agent profile.");
       return false;
     }
   };
 
-useEffect(() => {
-  const checkAndRedirect = async () => {
-    try {
-      const res = await fetch("http://localhost:3000/", {
-        credentials: "include",
-      });
+  useEffect(() => {
+    const checkAndRedirect = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/", {
+          credentials: "include",
+        });
 
-      if (res.ok) {
+        if (!res.ok) {
+          console.warn("User not authenticated");
+          setUser(null);
+          setUserID(null);
+          return;
+        }
+
         const data = await res.json();
         setUser(data.name);
-        setUserID(data.id); // for later use, but don't rely on it right now
+        setUserID(data.id);
 
-        const isRestaurant = await checkRestaurant(data.id);  // pass ID directly
+        const isRestaurant = await checkRestaurant();
         if (isRestaurant) {
-          navigate("/restaurant/dashboard"); 
+          navigate("/restaurant/dashboard");
         }
-      } else {
+
+        // Optional: check delivery agent here
+        // const isAgent = await checkDeliveryAgent();
+        // if (isAgent) {
+        //   navigate("/agent/dashboard");
+        // }
+
+      } catch (err) {
+        console.error("Network error (user check):", err);
         setUser(null);
         setUserID(null);
+        setError("Failed to validate user session.");
       }
-    } catch (err) {
-      console.error("User check failed:", err);
-      setUser(null);
-      setUserID(null);
-    }
-  };
+    };
 
-  checkAndRedirect();
-}, []); 
-
+    checkAndRedirect();
+  }, []);
 
   const handleAccountClick = (e) => {
     if (!user) {
@@ -98,7 +122,8 @@ useEffect(() => {
           <NavLink
             to="/join-us"
             className={({ isActive }) =>
-              `px-2 py-1 rounded transition ${isActive ? "text-red-600 font-semibold" : "hover:text-blue-500"
+              `px-2 py-1 rounded transition ${
+                isActive ? "text-red-600 font-semibold" : "hover:text-blue-500"
               }`
             }
           >
@@ -107,7 +132,8 @@ useEffect(() => {
           <NavLink
             to="/search"
             className={({ isActive }) =>
-              `px-2 py-1 rounded transition ${isActive ? "text-red-600 font-semibold" : "hover:text-blue-500"
+              `px-2 py-1 rounded transition ${
+                isActive ? "text-red-600 font-semibold" : "hover:text-blue-500"
               }`
             }
           >
@@ -116,7 +142,8 @@ useEffect(() => {
           <NavLink
             to="/offers-near-me"
             className={({ isActive }) =>
-              `px-2 py-1 rounded transition ${isActive ? "text-red-600 font-semibold" : "hover:text-blue-500"
+              `px-2 py-1 rounded transition ${
+                isActive ? "text-red-600 font-semibold" : "hover:text-blue-500"
               }`
             }
           >
@@ -126,7 +153,8 @@ useEffect(() => {
             to="/my-account"
             onClick={handleAccountClick}
             className={({ isActive }) =>
-              `px-2 py-1 rounded transition ${isActive ? "text-red-600 font-semibold" : "hover:text-blue-500"
+              `px-2 py-1 rounded transition ${
+                isActive ? "text-red-600 font-semibold" : "hover:text-blue-500"
               }`
             }
           >
@@ -135,7 +163,8 @@ useEffect(() => {
           <NavLink
             to="/my-cart"
             className={({ isActive }) =>
-              `px-2 py-1 rounded transition ${isActive ? "text-red-600 font-semibold" : "hover:text-blue-500"
+              `px-2 py-1 rounded transition ${
+                isActive ? "text-red-600 font-semibold" : "hover:text-blue-500"
               }`
             }
           >
@@ -146,6 +175,13 @@ useEffect(() => {
 
       {/* Sidebar for login/signup */}
       {showSidebar && <SidebarForm onClose={() => setShowSidebar(false)} />}
+
+      {/* ✅ Optional: display error if needed */}
+      {error && (
+        <div className="bg-red-100 text-red-700 px-4 py-2 text-sm text-center">
+          {error}
+        </div>
+      )}
     </header>
   );
 };

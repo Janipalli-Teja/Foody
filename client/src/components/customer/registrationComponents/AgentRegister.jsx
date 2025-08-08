@@ -20,7 +20,7 @@ const AgentRegistration = () => {
 
     async function handleRegistration() {
         try {
-            const url = "http://localhost:3000/agent-registration";
+            const url = "http://localhost:3000/agent/registration";
             const formData = new FormData();
             formData.append("fullname", name);
             formData.append("phone_number", phoneno);
