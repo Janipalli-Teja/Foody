@@ -9,15 +9,13 @@ const allowedOrigins = ["http://localhost:5173"];
 
 // importing routes 
 const homeRouter = require('./routes/cutomer/home.route.js');
-const AgentRegistration = require('./routes/agent/agent.registration.route.js');
-const RestaurantRegistration = require("./routes/restaurant/restaurant.registration.route.js");
 const AdminActions = require("./routes/admin/admin.actions.route.js");
 const UserRouter = require("./routes/user.route.js");
-const CustomerProfile=require("./routes/cutomer/customer.profile.route.js");
-const ResturantRoutes=require("./routes/restaurant/restaurant.route.js");
+const CustomerProfile = require("./routes/cutomer/customer.profile.route.js");
+const ResturantRoutes = require("./routes/restaurant/restaurant.route.js");
 
 //importing middilewares 
-const verifyToken=require("./middlewares/auth.middleware.js")
+const verifyToken = require("./middlewares/auth.middleware.js")
 
 const app = express();
 
@@ -37,17 +35,28 @@ ConnectionDB(process.env.MONGO_URI)
 
 
 
-app.use("/home",homeRouter);
-app.use("/agent-registration", AgentRegistration);
-app.use("/restaurant-registration", RestaurantRegistration);
+app.use("/home", homeRouter);
+// app.use("/agent-registration", AgentRegistration);
 app.use("/admin", AdminActions);
 app.use("/user", UserRouter);
-app.use("/customer",CustomerProfile);
-app.use("/restaurant",ResturantRoutes);
+app.use("/customer", verifyToken, CustomerProfile);
+app.use("/restaurant", verifyToken, ResturantRoutes);
 
 
-app.get("/",verifyToken,(req,res)=>{
-    return res.status(200).json(req.user)
+app.get("/", verifyToken, (req, res) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ msg: "User not logged in" });
+    }
+
+    res.status(200).json({
+      name: req.user.name,
+      id: req.user._id,
+    });
+  } catch (err) {
+    console.error("Session check failed:", err);
+    res.status(400).json({ msg: "Session error" });
+  }
 })
 
 // start server
