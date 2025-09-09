@@ -22,7 +22,7 @@ const AgentRegistration = () => {
         try {
             const url = "http://localhost:3000/agent-registration";
             const formData = new FormData();
-            formData.append("fullname", name);
+            formData.append("full_name", name);
             formData.append("phone_number", phoneno);
             formData.append("email", email);
             formData.append("vehicle_number", vehicleNumber);
