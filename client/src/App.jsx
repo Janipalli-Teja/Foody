@@ -21,6 +21,10 @@ import CustomerLayout from './components/CustomerLayout.jsx';
 import RestaurantLayout from './components/RestaurantLayout.jsx';
 
 
+//errorpage 
+import ErrorPage from './components/ErrorPage.jsx';
+
+
 function App() {
   return (
     <div>
@@ -40,8 +44,8 @@ function App() {
           <Route path="history" element={<OrderHistory />} />
           <Route path="offers" element={<Offers />} />
           <Route path="support" element={<RestaurantSupport />} />
-          <Route path="payments" element={<Payments />} />
         </Route> 
+        <Route path="*" element={<ErrorPage/>}/>
       </Routes>
     </div>
   );
