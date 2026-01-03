@@ -13,7 +13,7 @@ CustomerProfile.get("/my-account", authenticate, async (req, res) => {
             return res.json({ "msg": "no user address" });
         }
         const address = profile.address;
-        return res.json({ address : profile.address });
+        return res.json({ address: profile.address });
     }
     catch (err) {
         console.log(err);
