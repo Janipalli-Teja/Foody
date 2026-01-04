@@ -98,6 +98,3 @@ Foody/
 
 - **Start Backend**: `cd server && npm run dev`
 - **Start Frontend**: `cd client && npm run dev`
-
-## 📄 License
-This project is licensed under the ISC License.
