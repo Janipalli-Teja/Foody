@@ -14,6 +14,7 @@ const RestaurantRegistration = require("./routes/restaurant/restaurant.registrat
 const AdminActions = require("./routes/admin/admin.actions.route.js");
 const UserRouter = require("./routes/user.route.js");
 const CustomerProfile=require("./routes/cutomer/customer.profile.route.js");
+const ResturantRoutes=require("./routes/restaurant/restaurant.route.js");
 
 //importing middilewares 
 const verifyToken=require("./middlewares/auth.middleware.js")
@@ -42,6 +43,7 @@ app.use("/restaurant-registration", RestaurantRegistration);
 app.use("/admin", AdminActions);
 app.use("/user", UserRouter);
 app.use("/customer",CustomerProfile);
+app.use("/restaurant",ResturantRoutes);
 
 
 app.get("/",verifyToken,(req,res)=>{
